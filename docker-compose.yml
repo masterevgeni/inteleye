@@ -4,7 +4,7 @@ services:
     build: ./server
     container_name: inteleye-server
     ports:
-      - '5000:5000'
+      - ${SERVER_PORT}:${SERVER_PORT}
     depends_on:
       - mongodb
     volumes:
@@ -19,7 +19,7 @@ services:
     build: ./client
     container_name: inteleye-client
     ports:
-      - '3000:3000'
+      - ${client_PORT}:${client_PORT}
     volumes:
       - ./client:/app
     command: bash -c "npm install && npm start"
