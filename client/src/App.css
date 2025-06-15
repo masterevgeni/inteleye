@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.container-404 {
+  margin-top: 32px;
+  color: #20b2aa;
+  text-align: center;
+}
+
+.container-404 h4 {
+  text-shadow: 0 0 8px #008080;
+}
+
+.back-button {
+  margin-top: 16px;
+}
