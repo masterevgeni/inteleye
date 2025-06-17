@@ -37,13 +37,6 @@ function createData(
   return { artist, title, playCount};
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Ice cream sandwich', 237, 9.0),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-];
-console.log('rows: ', rows);
-
 export default function CustomizedTables() {
 
    const { data, isLoading, isError, error } = useSongsList();
