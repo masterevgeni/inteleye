@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { playRandoSong } from './../services/musicApi';
 
-export const usePlaySong = async() => {
-  try{
-    const resp = await playRandoSong(); 
-    console.log('resp:',resp);
-        return resp;
+export const usePlaySong = async () => {
+  try {
+    const response = await playRandoSong();
+    // console.log('response:', response);
+    return response;
     // return useMutation({
     // mutationFn: playRandoSong,
     // onSuccess: (data) => {
@@ -14,12 +14,12 @@ export const usePlaySong = async() => {
     // onError: (error) => {
     //   console.error('Error playing song:', error);
     // },
-  // });
+    // });
 
-  }catch(error) {
+  } catch (error) {
     console.error('Error in usePlaySong:', error);
     throw error;
-  }finally {
+  } finally {
     console.log('usePlaySong hook executed');
   }
 };

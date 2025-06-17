@@ -16,7 +16,7 @@ export class Song extends Document {
   genre: string;
 
   @Prop({ required: true })
-  duration: number; // in seconds
+  duration: number;
 
   @Prop({ required: true })
   releaseYear: number;

@@ -10,8 +10,9 @@ import SnackbarMessage from './../components/SnackBar/SnackBar'
 import { GenreDistributionChart } from '../components/Charts/GenreDistributionChart';
 import { TopArtistsChart } from '../components/Charts/TopArtistsChart';
 import { MusicByDecadeChart } from '../components/Charts/MusicByDecadeChart';
+import CustomizedTables from './../components/SongTable/SongTable'
 
-const DashboardPage = () => {
+const DashboardPage: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   const { data, isLoading, isError, error } = useMusicStats();
@@ -20,11 +21,11 @@ const DashboardPage = () => {
   console.log('isError: ', isError);
   console.log('error: ', error);
 
-const playSong = usePlaySong;
-console.log('playSong: ', playSong);
+  const playSong = usePlaySong;
+  console.log('playSong: ', playSong);
 
-if (isLoading) {
-  return (
+  if (isLoading) {
+    return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
         <CircularProgress />
       </Box>
@@ -82,7 +83,9 @@ if (isLoading) {
           <Grid size={{ xs: 12, sm: 4, lg: 3, }}>
             <KpiCard title="Avg. Length" value={formatDuration(data?.kpis.avgDuration ?? 0)} />
           </Grid>
-
+          <Grid size={12}>
+            <CustomizedTables />
+          </Grid>
           {/* Charts */}
           <Grid size={12}>
             <GenreDistributionChart data={data?.genreDistribution ?? []} />
@@ -95,7 +98,7 @@ if (isLoading) {
           </Grid>
         </Grid>
       </Box>
-      <SnackbarMessage isOpen={open}/>
+      <SnackbarMessage isOpen={open} />
     </Box>
   );
 };

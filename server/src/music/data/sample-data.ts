@@ -1,4 +1,4 @@
-// A sample dataset to make the dashboard interesting from the start.
+
 export const sampleSongs = [
     { title: "Bohemian Rhapsody", artist: "Queen", album: "A Night at the Opera", genre: "Rock", duration: 355, releaseYear: 1975, lastPlayedAt: new Date("2024-01-15T10:00:00Z") },
     { title: "Let It Be ", artist: "The Beatles", album: "LET IT BE", genre: "Rock", duration: 620, releaseYear: 1950 },

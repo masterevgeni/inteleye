@@ -3,11 +3,16 @@ import { MusicService } from './music.service';
 
 @Controller('music')
 export class MusicController {
-  constructor(private readonly musicService: MusicService) {}
+  constructor(private readonly musicService: MusicService) { }
 
   @Get('stats')
-  async getDashboardStats() {
+  async dashboardStats() {
     return this.musicService.getDashboardStats();
+  }
+
+  @Get('songs')
+  async songs() {
+    return this.musicService.findAll();
   }
 
   @Post('play-random')

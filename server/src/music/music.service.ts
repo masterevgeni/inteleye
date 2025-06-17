@@ -15,7 +15,6 @@ export interface IChartDataPoint {
 }
 
 @Injectable()
-// export class MusicService  {
 export class MusicService implements OnModuleInit {
   constructor(@InjectModel(Song.name) private songModel: Model<Song>) {}
 
@@ -33,8 +32,7 @@ export class MusicService implements OnModuleInit {
   }
 
   async getDashboardStats() {
-    // 1. KPI Calculations
-    const kpiPipeline: PipelineStage[] = [ // <-- Explicitly type the array
+    const kpiPipeline: PipelineStage[] = [
       {
         $group: {
           _id: null,
@@ -53,23 +51,20 @@ export class MusicService implements OnModuleInit {
       },
     ];
 
-    // 2. Genre Distribution
-    const genrePipeline: PipelineStage[] = [ // <-- Explicitly type the array
+    const genrePipeline: PipelineStage[] = [
       { $group: { _id: '$genre', count: { $sum: 1 } } },
       { $project: { name: '$_id', value: '$count', _id: 0 } },
       { $sort: { value: -1 } },
     ];
 
-    // 3. Top 5 Artists
-    const artistPipeline: PipelineStage[] = [ // <-- Explicitly type the array
+    const artistPipeline: PipelineStage[] = [
       { $group: { _id: '$artist', count: { $sum: 1 } } },
       { $sort: { count: -1 } },
       { $limit: 5 },
       { $project: { name: '$_id', songs: '$count', _id: 0 } },
     ];
     
-    // 4. Songs by Decade
-    const decadePipeline: PipelineStage[] = [ // <-- Explicitly type the array
+    const decadePipeline: PipelineStage[] = [ 
         {
             $project: {
                 decade: {
@@ -85,10 +80,8 @@ export class MusicService implements OnModuleInit {
         { $project: { name: '$_id', count: 1, _id: 0 } },
     ];
 
-    // 5. Recently Played
     const getMostRecentPlayed = this.songModel.findOne().sort({ lastPlayedAt: -1 }).exec();
 
-    // Now call aggregate with the correctly typed pipelines
     const [kpiResult, genreDistribution, topArtists, byDecade, mostRecent] = await Promise.all([
       this.songModel.aggregate<IKpiResult>(kpiPipeline).exec(),
       this.songModel.aggregate<IChartDataPoint>(genrePipeline).exec(),
@@ -120,7 +113,10 @@ export class MusicService implements OnModuleInit {
       randomSong.lastPlayedAt = new Date();
       return randomSong.save();
     }
-    // Handle the case where the song is not found, although unlikely in this context
     throw new Error('Could not find a random song to play.');
+  }
+
+   async findAll(): Promise<Song[]> {
+    return this.songModel.find().exec();
   }
 }

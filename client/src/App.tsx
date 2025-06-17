@@ -5,14 +5,7 @@ import DashboardPage from './pages/DashboardPage'
 
 import './App.css';
 
-const queryClient = new QueryClient({
-  // defaultOptions: {
-  //   queries: {
-  //     refetchInterval: 30000, // 30 seconds polling
-  //     // staleTime: 25000,
-  //   },
-  // },
-});
+const queryClient = new QueryClient({});
 
 const App: React.FC = () => {
 
