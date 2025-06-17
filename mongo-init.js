@@ -1,6 +1,8 @@
 // Switch to your application database
 db = db.getSiblingDB('inteleye');
 
+console.log('-------========Initializing Inteleye Database========-------');
+
 // Create a user for your application
 db.createUser({
   user: 'inteleye_user',
@@ -13,16 +15,16 @@ db.createUser({
   ]
 });
 
-// Create some initial collections (optional)
-db.createCollection('users');
-db.createCollection('projects');
+// // Create some initial collections (optional)
+// db.createCollection('users');
+// // db.createCollection('projects');
 
-// Insert some sample data (optional)
-db.users.insertOne({
-  name: 'Admin User',
-  email: 'admin@inteleye.com',
-  role: 'admin',
-  createdAt: new Date()
-});
+// // Insert some sample data (optional)
+// db.users.insertOne({
+//   name: 'Admin User',
+//   email: 'admin@inteleye.com',
+//   role: 'admin',
+//   createdAt: new Date()
+// });
 
-print('Database initialized successfully!');
+print('-------========Database initialized successfully!========-------');

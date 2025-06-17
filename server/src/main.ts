@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -8,9 +10,17 @@ async function bootstrap() {
     new FastifyAdapter()
   );
 
-   await app.register(require('@fastify/cors'), {
+  await app.register(require('@fastify/cors'), {
     origin: true,
+    methods: ['GET', 'POST'],
+    credentials: true,
   });
+
+  // API prefix
+  app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(new ValidationPipe());
+
 
   await app.listen(process.env.SERVER_PORT || 5000, process.env.allowed_origins || '');
 }
