@@ -1,10 +1,10 @@
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ChartDataPoint } from '../../types';
+import { ChartDataPointProps } from '../../types';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1943'];
 
-export const GenreDistributionChart = ({ data }: { data: ChartDataPoint[] }) => {
+export const GenreDistributionChart = ({ data }: { data: ChartDataPointProps[] }) => {
   return (
     <Card sx={{ height: '100%' }}>
       <CardContent>

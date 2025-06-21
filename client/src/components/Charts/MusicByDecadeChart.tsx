@@ -1,8 +1,8 @@
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ChartDataPoint } from '../../types';
+import { ChartDataPointProps } from '../../types';
 
-export const MusicByDecadeChart = ({ data }: { data: ChartDataPoint[] }) => {
+export const MusicByDecadeChart = ({ data }: { data: ChartDataPointProps[] }) => {
   return (
     <Card sx={{ height: '100%' }}>
       <CardContent>

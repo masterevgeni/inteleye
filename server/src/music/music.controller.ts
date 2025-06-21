@@ -21,7 +21,6 @@ export class MusicController {
     if (!song) {
       return { message: 'No song is currently available to play.' };
     }
-    // return { message: `Now playing ${song.title} by ${song.artist}`};
     return song;
   }
 }

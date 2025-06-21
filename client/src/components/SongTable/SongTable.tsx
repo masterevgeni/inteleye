@@ -1,13 +1,8 @@
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, CircularProgress, Alert} from '@mui/material';
+import { tableCellClasses } from '@mui/material/TableCell';
 import { useSongsList } from './../../hooks/useSongs';
+import {SongRowProps as SongRow} from './../../types/index';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,52 +18,64 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
 }));
 
-function createData(
-  artist: string,
-  title: number,
-  playCount: number,
-) {
-  return { artist, title, playCount};
-}
+const ScrollableTableContainer = styled(TableContainer)({
+  maxHeight: 400,
+  overflowY: 'auto',
+});
 
-export default function CustomizedTables() {
 
-   const { data, isLoading, isError, error } = useSongsList();
-    console.log('data: ', data);
-    console.log('isLoading: ', isLoading);
-    console.log('isError: ', isError);
-    console.log('error: ', error);
+export default function MusicTable() {
+  const { data, isLoading, isError, error } = useSongsList();
+
+   if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Box p={3}>
+        <Alert severity="error">
+          Failed to load dashboard data: {error.message}
+        </Alert>
+      </Box>
+    );
+  }
+
   return (
-    <TableContainer component={Paper as React.ElementType}>
-      <Table  aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Band</StyledTableCell>
-            <StyledTableCell align="right">Title</StyledTableCell>
-            <StyledTableCell align="right">Play&nbsp;count</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data && data.map((row:any) => {
-            console.log('row: ', row);
-            
-            return (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.artist}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.title}</StyledTableCell>
-              <StyledTableCell align="right">{row.playCount}</StyledTableCell>
-            </StyledTableRow>
-          )})}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <ScrollableTableContainer>
+      <Paper>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Band</StyledTableCell>
+              <StyledTableCell align="right">Title</StyledTableCell>
+              <StyledTableCell align="right">Play&nbsp;count</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data && data.map((row:SongRow) => {
+              return (
+                <StyledTableRow key={row._id}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.artist}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.title}</StyledTableCell>
+                  <StyledTableCell align="right">{row.playCount}</StyledTableCell>
+                </StyledTableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </ScrollableTableContainer>
   );
 }

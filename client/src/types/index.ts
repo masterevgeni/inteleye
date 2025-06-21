@@ -19,15 +19,29 @@ export interface Kpis {
   totalUniqueArtists: number;
 }
 
-export interface ChartDataPoint {
+export interface ChartDataPointProps {
   name: string;
   [key: string]: string | number;
 }
 
-export interface DashboardStats {
+export interface DashboardStatsProps {
   kpis: Kpis;
-  genreDistribution: ChartDataPoint[];
-  topArtists: ChartDataPoint[];
-  songsByDecade: ChartDataPoint[];
+  genreDistribution: ChartDataPointProps[];
+  topArtists: ChartDataPointProps[];
+  songsByDecade: ChartDataPointProps[];
   nowPlaying: Song | null;
+}
+
+ export interface SongRowProps {
+    "_id": string,
+    "title":string,
+    "artist": string,
+    "album": string
+    "genre": string,
+    "duration": number,
+    "releaseYear": number,
+    "playCount": number,
+    "__v": number,
+    "createdAt": string,
+    "updatedAt": string
 }

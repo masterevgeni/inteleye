@@ -101,22 +101,18 @@ export class MusicService implements OnModuleInit {
 
   async playRandomSong(): Promise<Song> {
     const count = await this.songModel.countDocuments();
-    console.log('counst: ', count);
-    
     const random = Math.floor(Math.random() * count);
-    console.log('random: ', random);
-
     const randomSong = await this.songModel.findOne().skip(random).exec();
-    console.log('randomSong: ',randomSong);
 
     if (randomSong) {
       randomSong.lastPlayedAt = new Date();
+      randomSong.playCount += 1;
       return randomSong.save();
     }
     throw new Error('Could not find a random song to play.');
   }
 
    async findAll(): Promise<Song[]> {
-    return this.songModel.find().exec();
+    return this.songModel.find().sort({ playCount: -1 }).exec();
   }
 }

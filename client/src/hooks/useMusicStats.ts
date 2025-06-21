@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchDashboardStats } from './../services/musicApi';
 
-const POLLING_INTERVAL_MS = 20000;
+const POLLING_INTERVAL_MS = 5000;
 
 export const useMusicStats = () => {
   return useQuery({
