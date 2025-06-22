@@ -14,10 +14,16 @@ import MusicTable from './../components/SongTable/SongTable'
 
 const DashboardPage: React.FC = () => {
   const [open, setOpen] = React.useState(false);
-
+  const { mutate: playNewSong,  error: playError, data: currentSong } = usePlaySong({openSnackbar: setOpen});
+  
+  
   const { data, isLoading, isError, error } = useMusicStats();
+  
 
-  const playSong = usePlaySong;
+  const handlePlayClick = () => {
+    playNewSong(); 
+    
+};
 
   if (isLoading) {
     return (
@@ -52,7 +58,7 @@ const DashboardPage: React.FC = () => {
             <Button
               variant="contained"
               startIcon={<PlayArrowIcon />}
-              onClick={() => playSong()}
+              onClick={() => handlePlayClick()}
             >
               Play Random Song
             </Button>
@@ -84,7 +90,7 @@ const DashboardPage: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-      <SnackbarMessage isOpen={open} />
+      {SnackbarMessage({ isOpen: open }, setOpen)}
     </Box>
   );
 };

@@ -126,4 +126,4 @@ To change song, press on "play random song". IT WILL NOT RETURN TO BROWSER NRE S
 * you can change it in code to any timeout but pay attention to ratelimit in server side.
 
 
-* Given more time: possible add swagger, test, config files for clinet, and many more.
+* Given more time: possible add Authorization( like API key) for requests, swagger, test, config files for clinet, and many more.
