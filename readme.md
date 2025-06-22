@@ -4,8 +4,8 @@ This is a full-stack project created as a home assignment. It features a dashboa
 
 The main goal is to showcase the ability to build a complete end-to-end feature, with a strong focus on data-driven insights, clean code, and a high-quality responsive UI/UX.
 
-![Dashboard Screenshot](https://github.com/masterevgeni/inteleye/Screenshot1.png)
-![Dashboard Screenshot](https://github.com/masterevgeni/inteleye/Screenshot2.png)
+![Dashboard Screenshot](https://github.com/masterevgeni/inteleye/blob/main/Screenshot1.png)
+![Dashboard Screenshot](https://github.com/masterevgeni/inteleye/blob/main/Screenshot2.png)
 ![Dashboard Video](https://youtu.be/L6WUqkiHPp8)
 
 ---
